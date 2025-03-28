@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Bye Bong Lee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ff4d8e;
+            --soft-pink: #fff0f5;
+            --darker-pink: #ffcce0;
+            --blue: #3a7bd5;
+            --light-blue: #00d2ff;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0;
+            background: var(--soft-pink);
+            color: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .container {
+            padding: 4rem 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(to right, var(--blue), var(--pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--blue), var(--pink));
+            border-radius: 2px;
+        }
+        
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 4rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .photo-card {
+            width: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            position: relative;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .photo-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 4px solid var(--pink);
+        }
+        
+        .photo-caption {
+            padding: 1.5rem;
+            background: white;
+            text-align: center;
+            font-weight: 600;
+            color: var(--blue);
+        }
+        
+        .message-box {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid var(--blue);
+        }
+        
+        .message-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--blue), var(--pink));
+        }
+        
+        .message-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .message-text:first-child {
+            color: var(--blue);
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+        
+        .message-text::before {
+            content: '❝';
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            color: var(--pink);
+            font-size: 2rem;
+            opacity: 0.3;
+
+
+}
+        
+        .signature {
+            text-align: center;
+            margin-top: 4rem;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .team-name {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 2rem;
+            background: linear-gradient(to right, var(--blue), var(--light-blue));
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(58, 123, 213, 0.3);
+        }
+        
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .music-control {
+            background: var(--pink);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .music-info {
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        /* Animated background elements */
+        .bg-heart {
+            position: absolute;
+            opacity: 0.05;
+            z-index: -1;
+            font-size: 120px;
+            color: var(--pink);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .photo-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            .music-player {
+                left: 20px;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorative elements -->
+    <div class="bg-heart" style="top: 10%; left: 5%;">❤</div>
+    <div class="bg-heart" style="top: 70%; left: 80%; animation: float 6s ease-in-out infinite;">❤</div>
+    <div class="bg-heart" style="top: 30%; left: 90%;">❤</div>
+    <div class="bg-heart" style="top: 80%; left: 10%; animation: float 8s ease-in-out infinite;">❤</div>
+    
+    <div class="container">
+        <header class="animate">
+            <h1>Thanks Bong for Everything</h1>
+        </header>
+        
+        <div class="photo-gallery">
+            <div class="photo-card animate" style="animation-delay: 0.2s">
+                <img src="bonglee1.jpg" alt="Manager at work" class="photo-img">
+                <div class="photo-caption">Bong lee lerng cute xD</div>
+            </div>
+            <div class="photo-card animate" style="animation-delay: 0.4s">
+                <img src="bonglee2.JPG" alt="Team celebration" class="photo-img">
+                <div class="photo-caption">Our Memories bong</div>
+            </div>
+        </div>
+        
+        <div class="message-box animate" style="animation-delay: 0.6s">
+            <p class="message-text">Dear Bong Lee,</p>
+            <p class="message-text">As we say goodbye, I want to thank you for everything even when I've made many mistake but you still forgave and forgot</p>
+            <p class="message-text">You've created more than just a team - you've built a family. The lessons you've taught us will continue to guide our work. Our team will stay strong bong</p>
+
+
+<p class="message-text">Wishing bong lee success in achiving all your dreams</p>
+        </div>
+        
+        <div class="signature animate" style="animation-delay: 0.8s">
+            <p>Don't wanna say goodbye bong but "Goodbye bong lee",</p>
+            <div class="team-name"></div>
+        </div>
+    </div>
+
+   
+    <div class="music-player">
+        <button class="music-control" id="playBtn">▶</button>
+        <div class="music-info">Birds of a feather</div>
+        <audio id="bgMusic" loop>
+            
+            <source src="birdsof.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        // Music player functionality
+        const music = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = false;
+        
+        // Try to autoplay (may be blocked by browser)
+        document.addEventListener('DOMContentLoaded', () => {
+            music.volume = 0.3;
+            const promise = music.play();
+            
+            if (promise !== undefined) {
+                promise.catch(error => {
+                    // Auto-play was prevented, show pause button
+                    isPlaying = false;
+                    playBtn.textContent = '▶';
+                }).then(() => {
+                    isPlaying = true;
+                    playBtn.textContent = '❚❚';
+                });
+            }
+        });
+        
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                playBtn.textContent = '▶';
+            } else {
+                music.play();
+                playBtn.textContent = '❚❚';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Animation trigger
+        const elements = document.querySelectorAll('.animate');
+        elements.forEach(el => {
+            const delay = el.style.animationDelay || '0s';
+            el.style.opacity = '0';
+            setTimeout(() => {
+                el.classList.add('animate');
+            }, parseFloat(delay) * 1000);
+        });
+    </script>
+</body>
+</html>
